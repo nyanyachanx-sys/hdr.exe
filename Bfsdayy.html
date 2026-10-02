@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>happy bfs day lol</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Patrick+Hand&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #fff0f5;
+    font-family: 'Quicksand', sans-serif;
+    color: #684554;
+    overflow-x: hidden;
+}
+
+/* floating stuff */
+
+.float {
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .7;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(8deg);
+    }
+}
+
+/* main */
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    width: min(650px, 94vw);
+    background: rgba(255,255,255,.9);
+    border: 2px solid #f5c5d5;
+    border-radius: 32px;
+    padding: 40px 28px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(170,90,120,.13);
+}
+
+.tiny {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #bd7892;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: clamp(52px, 11vw, 82px);
+    line-height: .9;
+    color: #d96d91;
+    margin: 15px 0 20px;
+}
+
+p {
+    line-height: 1.7;
+}
+
+.intro {
+    font-size: 17px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.small {
+    font-size: 13px;
+    color: #98727e;
+}
+
+/* couple */
+
+.couple {
+    height: 165px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 24px;
+    margin: 30px 0 10px;
+}
+
+.person {
+    width: 75px;
+}
+
+.head {
+    width: 58px;
+    height: 58px;
+    margin: auto;
+    border-radius: 45%;
+    position: relative;
+}
+
+.haya .head {
+    background: #f4c6a5;
+}
+
+.haider .head {
+    background: #b87851;
+}
+
+.hair {
+    position: absolute;
+    top: -9px;
+    left: 4px;
+    width: 50px;
+    height: 34px;
+    background: #704339;
+    border-radius: 50% 50% 20% 20%;
+}
+
+.haya .hair {
+    background: #914d40;
+}
+
+.eye {
+    position: absolute;
+    top: 29px;
+    width: 5px;
+    height: 7px;
+    background: #49332f;
+    border-radius: 50%;
+}
+
+.eye.left {
+    left: 17px;
+}
+
+.eye.right {
+    right: 17px;
+}
+
+.body {
+    width: 65px;
+    height: 80px;
+    margin: -2px auto;
+    border-radius: 28px 28px 10px 10px;
+}
+
+.haya .body {
+    background: #e79ab6;
+}
+
+.haider .body {
+    background: #7895b8;
+}
+
+.middle-heart {
+    font-size: 27px;
+    margin-bottom: 65px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+/* button */
+
+button {
+    border: 0;
+    padding: 15px 28px;
+    border-radius: 100px;
+    background: #df82a2;
+    color: white;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .2s;
+    box-shadow: 0 8px 20px rgba(210,110,145,.2);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    background: #d56d92;
+}
+
+.note {
+    margin-top: 18px;
+    font-size: 12px;
+    color: #a27b87;
+}
+
+/* goodbye screen */
+
+#goodbye {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #fff0f5;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.goodbye-inner {
+    max-width: 500px;
+}
+
+.goodbye-inner h2 {
+    font-family: 'Patrick Hand', cursive;
+    color: #d96d91;
+    font-size: 55px;
+    margin: 0;
+}
+
+.goodbye-inner p {
+    font-size: 17px;
+}
+
+.loading {
+    margin-top: 25px;
+    color: #c37c96;
+    font-size: 13px;
+}
+
+/* hearts */
+
+.heart {
+    position: fixed;
+    z-index: 200;
+    pointer-events: none;
+    font-size: 22px;
+    animation: explode 2.5s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        transform: translate(0,0) scale(.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(
+                calc((var(--x) - 50) * 1vw),
+                calc((var(--y) - 50) * 1vh)
+            )
+            scale(1.4);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- floating flowers/hearts -->
+
+<div class="float" style="left:8%;top:14%;font-size:25px;">♡</div>
+<div class="float" style="left:15%;top:76%;font-size:24px;">🌷</div>
+<div class="float" style="right:9%;top:17%;font-size:25px;">♥</div>
+<div class="float" style="right:12%;top:74%;font-size:24px;">🌸</div>
+<div class="float" style="left:47%;top:7%;font-size:20px;">♡</div>
+<div class="float" style="right:30%;bottom:8%;font-size:22px;">✿</div>
+
+
+<div class="wrapper">
+
+    <div class="card">
+
+        <div class="tiny">
+            apparently this is a real thing
+        </div>
+
+        <h1>happy bf's day ♡</h1>
+
+        <p class="intro">
+            hi loser.
+            <br><br>
+
+            apparently it's boyfriend's day so I had to do
+            something because I'm not letting a perfectly good
+            excuse to annoy you go to waste.
+        </p>
+
+        <div class="couple">
+
+            <div class="person haya">
+
+                <div class="head">
+                    <div class="hair"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                </div>
+
+                <div class="body"></div>
+
+            </div>
+
+
+            <div class="middle-heart">
+                ♡
+            </div>
+
+
+            <div class="person haider">
+
+                <div class="head">
+                    <div class="hair"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                </div>
+
+                <div class="body"></div>
+
+            </div>
+
+        </div>
+
+
+        <p>
+            I made you something.
+            <br>
+            It's actually kind of embarrassing.
+            <br>
+            So obviously you're legally required to look at it.
+        </p>
+
+
+        <button onclick="openNotion()">
+            okay fine, open it ♡
+        </button>
+
+
+        <div class="note">
+            yes I spent time making this instead of doing uni work
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- transition screen -->
+
+<div id="goodbye">
+
+    <div class="goodbye-inner">
+
+        <h2>waittt ♡</h2>
+
+        <p>
+            okay I'm actually nervous now 😭
+            <br><br>
+            go look at your thing.
+        </p>
+
+        <div class="loading">
+            opening your extremely important boyfriend document...
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function makeHearts() {
+
+    const symbols = ["♡", "♥", "💗", "🌸", "✿"];
+
+    for (let i = 0; i < 35; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerText =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        heart.style.left = "50vw";
+        heart.style.top = "45vh";
+
+        heart.style.setProperty(
+            "--x",
+            Math.random() * 160 - 30
+        );
+
+        heart.style.setProperty(
+            "--y",
+            Math.random() * 160 - 30
+        );
+
+        heart.style.animationDelay =
+            Math.random() * .25 + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    }
+}
+
+
+function openNotion() {
+
+    makeHearts();
+
+    document.querySelector(".wrapper").style.display = "none";
+
+    const goodbye = document.getElementById("goodbye");
+
+    goodbye.style.display = "flex";
+
+    setTimeout(() => {
+
+        window.location.href =
+        "https://app.notion.com/p/My-favourite-bug-bfd84e9084e44f7e93bfe5b11d3738e9?source=copy_link";
+
+    }, 2200);
+}
+
+</script>
+
+</body>
+</html>
