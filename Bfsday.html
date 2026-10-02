@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy BF's Day ♡</title>
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 20%, #ffd9e7 0 3px, transparent 4px),
+        radial-gradient(circle at 80% 30%, #ffd9e7 0 3px, transparent 4px),
+        #fff5f8;
+    font-family: "Courier New", monospace;
+    color: #714554;
+    overflow-x: hidden;
+}
+/* FLOATING DECORATIONS */
+.decor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    animation: float 5s ease-in-out infinite;
+}
+.heart1 { left: 7%; top: 15%; font-size: 28px; }
+.heart2 { right: 8%; top: 20%; font-size: 35px; animation-delay: 1s; }
+.heart3 { left: 15%; bottom: 15%; font-size: 22px; animation-delay: 2s; }
+.heart4 { right: 15%; bottom: 12%; font-size: 25px; animation-delay: .5s; }
+.flower1 { left: 4%; top: 50%; font-size: 35px; }
+.flower2 { right: 4%; top: 55%; font-size: 32px; animation-delay: 1.5s; }
+@keyframes float {
+    0%,100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(5deg);
+    }
+}
+/* MAIN */
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 20px;
+}
+.small {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #b8758d;
+}
+h1 {
+    font-size: clamp(35px, 8vw, 70px);
+    color: #c8587d;
+    margin: 12px 0;
+    text-align: center;
+    text-shadow: 3px 3px #ffd3e1;
+}
+.subtitle {
+    text-align: center;
+    font-size: 15px;
+    max-width: 500px;
+    line-height: 1.7;
+}
+/* BUTTON */
+.openButton {
+    margin-top: 28px;
+    padding: 16px 30px;
+    border: 3px solid #754454;
+    background: #f28eac;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 6px 6px #754454;
+    transition: .15s;
+}
+.openButton:hover {
+    transform: translateY(-3px);
+}
+.openButton:active {
+    transform: translate(4px,4px);
+    box-shadow: 2px 2px #754454;
+}
+/* NOTE */
+.message {
+    margin-top: 45px;
+    background: #fff;
+    border: 3px solid #805061;
+    padding: 30px;
+    max-width: 650px;
+    box-shadow: 9px 9px #805061;
+    text-align: center;
+    line-height: 1.8;
+}
+.message h2 {
+    color: #d15d82;
+}
+.signature {
+    margin-top: 20px;
+    color: #c8587d;
+    font-weight: bold;
+}
+/* NOTION */
+#notionSection {
+    display: none;
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 50px;
+    animation: appear .7s ease;
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.notionHeader {
+    text-align: center;
+    margin-bottom: 18px;
+}
+.notionHeader h2 {
+    color: #c8587d;
+}
+.notionBox {
+    width: 100%;
+    height: 700px;
+    background: white;
+    border: 3px solid #805061;
+    box-shadow: 9px 9px #805061;
+    overflow: hidden;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.fallback {
+    text-align: center;
+    margin-top: 25px;
+    padding: 20px;
+    background: #fff;
+    border: 2px dashed #d47795;
+}
+.fallback a {
+    display: inline-block;
+    margin-top: 12px;
+    color: white;
+    background: #d96d90;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* FOOTER */
+.footer {
+    margin-top: 55px;
+    color: #b8758d;
+    font-size: 12px;
+}
+</style>
+</head>
+<body>
+<!-- DECORATIONS -->
+<div class="decor heart1">♡</div>
+<div class="decor heart2">♥</div>
+<div class="decor heart3">♡</div>
+<div class="decor heart4">♥</div>
+<div class="decor flower1">🌷</div>
+<div class="decor flower2">🌸</div>
+<div class="container">
+<div class="small">
+    A VERY IMPORTANT ANNOUNCEMENT
+</div>
+<h1>
+    Happy BF's Day ♡
+</h1>
+<div class="subtitle">
+    To my favourite person,
+    favourite menace,
+    favourite bug,
+    and unfortunately my favourite boyfriend.
+    <br><br>
+    I would <b>never</b> forget a day like this.
+    Obviously.
+    I am a very responsible girlfriend.
+    (ignore every other date I have forgotten.)
+</div>
+<button
+    class="openButton"
+    onclick="openNotion()">
+    ♡ I MADE YOU SOMETHING ♡
+</button>
+<div class="message">
+    <h2>Dear Haider,</h2>
+    <p>
+        Happy boyfriend's day to the boy who somehow
+        managed to become one of my favourite humans.
+    </p>
+    <p>
+        Thank you for all the random memories,
+        stupid conversations,
+        dates,
+        laughs,
+        hugs,
+        annoying me,
+        letting me annoy you,
+        and generally existing in my life.
+    </p>
+    <p>
+        You're stuck with me now unfortunately.
+    </p>
+    <p>
+        I love you more than this silly little website
+        can probably explain.
+    </p>
+    <div class="signature">
+        love you always ♡<br>
+        — Haya
+    </div>
+</div>
+<!-- NOTION SECTION -->
+<section id="notionSection">
+    <div class="notionHeader">
+        <div style="font-size:35px;">
+            🌷♡🌷
+        </div>
+        <h2>
+            okay now go look at this
+        </h2>
+        <p>
+            I made another little thing for you.
+            Don't judge me. 😭
+        </p>
+    </div>
+    <div class="notionBox">
+        <iframe
+            src="https://app.notion.com/p/My-favourite-bug-bfd84e9084e44f7e93bfe5b11d3738e9?source=copy_link">
+        </iframe>
+    </div>
+    <div class="fallback">
+        <p>
+            If Notion refuses to load inside the website
+            because it is being dramatic:
+        </p>
+        <a
+            href="https://app.notion.com/p/My-favourite-bug-bfd84e9084e44f7e93bfe5b11d3738e9?source=copy_link"
+            target="_blank">
+            Open my little Notion surprise ♡
+        </a>
+    </div>
+</section>
+<div class="footer">
+    made with an unreasonable amount of love ♡
+</div>
+</div>
+<script>
+function openNotion() {
+    const section =
+        document.getElementById("notionSection");
+    section.style.display = "block";
+    setTimeout(() => {
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
+    }, 100);
+    /*
+        little heart explosion
+    */
+    for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+            const heart =
+                document.createElement("div");
+            heart.innerHTML =
+                Math.random() > .5 ? "❤️" : "🌸";
+            heart.style.position = "fixed";
+            heart.style.left =
+                Math.random() * 100 + "vw";
+            heart.style.top =
+                (30 + Math.random() * 40) + "vh";
+            heart.style.fontSize =
+                (18 + Math.random() * 25) + "px";
+            heart.style.pointerEvents = "none";
+            heart.style.zIndex = "100";
+            heart.style.animation =
+                "float 3s ease-out";
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }, i * 50);
+    }
+}
+</script>
+</body>
+</html>
