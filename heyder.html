@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Haider ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #ffeef5;
+    font-family: "Courier New", monospace;
+}
+
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    image-rendering: pixelated;
+    cursor: pointer;
+}
+
+#start {
+    position: fixed;
+    inset: 0;
+    background: #ffeef5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    text-align: center;
+    padding: 25px;
+}
+
+#start h1 {
+    color: #8e405b;
+    font-size: clamp(28px, 8vw, 55px);
+    margin: 10px;
+}
+
+#start p {
+    color: #704354;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    border: 4px solid #6b3b4b;
+    background: #ef88a8;
+    color: white;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 5px 5px #6b3b4b;
+    cursor: pointer;
+}
+
+button:active {
+    transform: translate(4px,4px);
+    box-shadow: 1px 1px #6b3b4b;
+}
+
+#noteScreen {
+    position: fixed;
+    inset: 0;
+    background: #fff4f7;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 30px 20px;
+    z-index: 20;
+}
+
+.flower {
+    font-size: 85px;
+    animation: bloom 1.5s ease;
+}
+
+@keyframes bloom {
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.note {
+    background: #fff;
+    border: 4px solid #704354;
+    box-shadow: 8px 8px #704354;
+    max-width: 650px;
+    padding: 28px;
+    color: #633d4c;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.note h2 {
+    text-align: center;
+    color: #d55b82;
+}
+
+.heart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 25px;
+    animation: float 3s ease-out forwards;
+    z-index: 50;
+}
+
+@keyframes float {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-300px) scale(1.5);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- START -->
+
+<div id="start">
+
+    <div style="font-size:70px;">♡</div>
+
+    <h1>For Haider</h1>
+
+    <p>
+        There is someone waiting for you...
+        <br><br>
+        Click the button and find her. ❤️
+    </p>
+
+    <button onclick="startGame()">
+        START
+    </button>
+
+</div>
+
+
+<!-- GAME -->
+
+<canvas id="game"></canvas>
+
+
+<!-- LOVE NOTE -->
+
+<div id="noteScreen">
+
+    <div class="flower">🌷</div>
+
+    <div class="note">
+
+        <h2>You found me. ❤️</h2>
+
+        <p>
+        Haider,
+        </p>
+
+        <p>
+        I don't even know how to fit everything I feel for you
+        into one little note, but I wanted to try.
+        </p>
+
+        <p>
+        I love you for all the little things that became
+        <i>ours</i>.
+        The random conversations, the stupid jokes,
+        the dates, the drives, the hugs, the moments where
+        we did absolutely nothing but still somehow had
+        the best time.
+        </p>
+
+        <p>
+        I still think about the times you came to see me,
+        picking me up from uni, taking me to eat,
+        making sure I was okay, and all those tiny moments
+        that probably seemed normal to you but meant so much
+        to me.
+        </p>
+
+        <p>
+        I remember our Eid memories, our little dates,
+        our long conversations, the times we laughed until
+        something wasn't even funny anymore,
+        and all the memories that only make sense to us.
+        </p>
+
+        <p>
+        We've had difficult moments too.
+        We've misunderstood each other, gotten annoyed,
+        overthought things, and probably driven each other
+        slightly insane sometimes 😭
+        </p>
+
+        <p>
+        But through all of that, you're still the person
+        I want beside me.
+        </p>
+
+        <p>
+        And if I could choose one thing to keep from
+        every memory we've made, it wouldn't be one
+        particular date or one particular day.
+        It would be the feeling of being with you.
+        </p>
+
+        <p>
+        So thank you for every hug,
+        every laugh,
+        every random plan,
+        every memory,
+        every time you showed up,
+        and every little piece of your life
+        you've shared with me.
+        </p>
+
+        <p>
+        I love you more than I probably know how to explain.
+        And I'm really, really happy that somehow,
+        in this huge world,
+        I found you.
+        </p>
+
+        <p style="text-align:center;">
+            <b>
+            I would find you again. Every time. ❤️
+            </b>
+        </p>
+
+        <p style="text-align:right;">
+            — Haya 🌷
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let W, H;
+
+function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+}
+
+resize();
+
+window.addEventListener("resize", resize);
+
+
+/* -------------------------
+   CHARACTERS
+------------------------- */
+
+let started = false;
+let kissing = false;
+let finished = false;
+
+let haya = {
+    x: 0,
+    targetX: 0
+};
+
+let haider = {
+    x: 0,
+    targetX: 0
+};
+
+
+/* -------------------------
+   START GAME
+------------------------- */
+
+function startGame() {
+
+    document.getElementById("start").style.display = "none";
+
+    started = true;
+
+    haya.x = W * 0.30;
+    haya.targetX = W * 0.45;
+
+    haider.x = W * 0.70;
+    haider.targetX = W * 0.55;
+
+    animate();
+
+}
+
+
+/* -------------------------
+   CLICK
+------------------------- */
+
+canvas.addEventListener("click", function() {
+
+    if (!started || kissing || finished) return;
+
+    kissing = true;
+
+    haya.targetX = W * 0.47;
+    haider.targetX = W * 0.53;
+
+});
+
+
+/* -------------------------
+   PIXEL CHARACTER
+------------------------- */
+
+function drawHaya(x, y) {
+
+    ctx.save();
+
+    /*
+       shadow
+    */
+
+    ctx.fillStyle = "rgba(80,40,50,.15)";
+    ctx.fillRect(x - 24, y + 80, 48, 7);
+
+
+    /*
+       LEGS
+    */
+
+    ctx.fillStyle = "#5a3d48";
+
+    ctx.fillRect(x - 13, y + 55, 10, 35);
+    ctx.fillRect(x + 4, y + 55, 10, 35);
+
+
+    /*
+       SHOES
+    */
+
+    ctx.fillStyle = "#332b31";
+
+    ctx.fillRect(x - 17, y + 86, 16, 7);
+    ctx.fillRect(x + 3, y + 86, 17, 7);
+
+
+    /*
+       DRESS
+    */
+
+    ctx.fillStyle = "#d96f92";
+
+    ctx.beginPath();
+
+    ctx.moveTo(x, y + 25);
+    ctx.lineTo(x - 38, y + 65);
+    ctx.lineTo(x + 38, y + 65);
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /*
+       ARMS
+    */
+
+    ctx.fillStyle = "#f0c2a7";
+
+    ctx.fillRect(x - 32, y + 30, 8, 28);
+    ctx.fillRect(x + 24, y + 30, 8, 28);
+
+
+    /*
+       FACE
+    */
+
+    ctx.fillStyle = "#f3c8ad";
+
+    ctx.fillRect(x - 24, y - 20, 48, 45);
+
+
+    /*
+       RED-BROWN HAIR
+    */
+
+    ctx.fillStyle = "#8f3f32";
+
+    ctx.fillRect(x - 28, y - 27, 56, 15);
+
+    ctx.fillRect(x - 31, y - 18, 12, 45);
+    ctx.fillRect(x + 19, y - 18, 12, 45);
+
+    ctx.fillRect(x - 20, y - 35, 40, 12);
+
+
+    /*
+       BIG EYES
+    */
+
+    ctx.fillStyle = "#33252b";
+
+    ctx.fillRect(x - 16, y - 4, 9, 10);
+    ctx.fillRect(x + 7, y - 4, 9, 10);
+
+
+    /*
+       EYE SHINE
+    */
+
+    ctx.fillStyle = "white";
+
+    ctx.fillRect(x - 14, y - 3, 3, 3);
+    ctx.fillRect(x + 9, y - 3, 3, 3);
+
+
+    /*
+       LITTLE SMILE
+    */
+
+    ctx.fillStyle = "#9e5260";
+
+    ctx.fillRect(x - 4, y + 12, 9, 3);
+
+    ctx.restore();
+}
+
+
+function drawHaider(x, y) {
+
+    ctx.save();
+
+    /*
+       shadow
+    */
+
+    ctx.fillStyle = "rgba(80,40,50,.15)";
+    ctx.fillRect(x - 30, y + 105, 60, 8);
+
+
+    /*
+       LONG LEGS
+    */
+
+    ctx.fillStyle = "#343342";
+
+    ctx.fillRect(x - 15, y + 65, 12, 43);
+    ctx.fillRect(x + 4, y + 65, 12, 43);
+
+
+    /*
+       SHOES
+    */
+
+    ctx.fillStyle = "#222126";
+
+    ctx.fillRect(x - 20, y + 104, 19, 8);
+    ctx.fillRect(x + 2, y + 104, 20, 8);
+
+
+    /*
+       BODY
+    */
+
+    ctx.fillStyle = "#52758a";
+
+    ctx.fillRect(x - 28, y + 25, 56, 47);
+
+
+    /*
+       ARMS
+    */
+
+    ctx.fillStyle = "#b87554";
+
+    ctx.fillRect(x - 38, y + 28, 10, 42);
+    ctx.fillRect(x + 28, y + 28, 10, 42);
+
+
+    /*
+       HANDS
+    */
+
+    ctx.fillRect(x - 38, y + 65, 10, 10);
+    ctx.fillRect(x + 28, y + 65, 10, 10);
+
+
+    /*
+       TAN FACE
+    */
+
+    ctx.fillStyle = "#b87855";
+
+    ctx.fillRect(x - 26, y - 25, 52, 52);
+
+
+    /*
+       DARK BROWN / BLACK HAIR
+    */
+
+    ctx.fillStyle = "#30231f";
+
+    ctx.fillRect(x - 30, y - 35, 60, 18);
+
+    ctx.fillRect(x - 27, y - 27, 12, 18);
+    ctx.fillRect(x + 16, y - 27, 12, 18);
+
+    ctx.fillRect(x - 17, y - 43, 35, 12);
+
+
+    /*
+       EYES
+    */
+
+    ctx.fillStyle = "#241b1b";
+
+    ctx.fillRect(x - 15, y - 3, 7, 7);
+    ctx.fillRect(x + 8, y - 3, 7, 7);
+
+
+    /*
+       SMILE
+    */
+
+    ctx.fillStyle = "#673b39";
+
+    ctx.fillRect(x - 6, y + 12, 12, 3);
+
+    ctx.restore();
+}
+
+
+/* -------------------------
+   BACKGROUND
+------------------------- */
+
+function drawBackground() {
+
+    ctx.fillStyle = "#ffeef5";
+
+    ctx.fillRect(0, 0, W, H);
+
+
+    /*
+       little flowers
+    */
+
+    for (let i = 0; i < 15; i++) {
+
+        let x = (i * 137) % W;
+        let y = (i * 91) % H;
+
+        ctx.fillStyle = "#f7c5d5";
+
+        ctx.fillRect(x, y, 5, 5);
+        ctx.fillRect(x + 6, y, 5, 5);
+        ctx.fillRect(x, y + 6, 5, 5);
+        ctx.fillRect(x + 6, y + 6, 5, 5);
+
+    }
+
+
+    /*
+       little instruction
+    */
+
+    if (!kissing) {
+
+        ctx.fillStyle = "#8b5366";
+
+        ctx.font = "bold 17px Courier New";
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            "click anywhere to bring them together ❤️",
+            W / 2,
+            H - 35
+        );
+
+    }
+
+}
+
+
+/* -------------------------
+   HEARTS
+------------------------- */
+
+function drawSmallHearts() {
+
+    ctx.font = "22px Arial";
+    ctx.textAlign = "center";
+
+    ctx.fillText("♡", W * .2, H * .25);
+    ctx.fillText("♡", W * .8, H * .30);
+    ctx.fillText("♡", W * .15, H * .65);
+    ctx.fillText("♡", W * .85, H * .70);
+
+}
+
+
+/* -------------------------
+   KISS
+------------------------- */
+
+function drawKiss() {
+
+    ctx.font = "40px Arial";
+    ctx.textAlign = "center";
+
+    ctx.fillText(
+        "♥",
+        W / 2,
+        H * .36
+    );
+
+}
+
+
+/* -------------------------
+   FINISH
+------------------------- */
+
+function finish() {
+
+    finished = true;
+
+    setTimeout(() => {
+
+        heartExplosion();
+
+    }, 200);
+
+    setTimeout(() => {
+
+        document.getElementById("noteScreen").style.display = "flex";
+
+    }, 3200);
+
+}
+
+
+/* -------------------------
+   HEART EXPLOSION
+------------------------- */
+
+function heartExplosion() {
+
+    for (let i = 0; i < 70; i++) {
+
+        setTimeout(() => {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML =
+                Math.random() > .5 ? "❤️" : "💕";
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.top =
+                (45 + Math.random() * 30) + "vh";
+
+            heart.style.fontSize =
+                (18 + Math.random() * 30) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 3000);
+
+        }, i * 35);
+
+    }
+
+}
+
+
+/* -------------------------
+   ANIMATION
+------------------------- */
+
+function animate() {
+
+    if (!started) return;
+
+    drawBackground();
+    drawSmallHearts();
+
+    /*
+       Move Haya
+    */
+
+    haya.x +=
+        (haya.targetX - haya.x) * 0.045;
+
+
+    /*
+       Move Haider
+    */
+
+    haider.x +=
+        (haider.targetX - haider.x) * 0.045;
+
+
+    /*
+       Draw characters
+
+       Haya is shorter
+    */
+
+    drawHaya(
+        haya.x,
+        H * .52
+    );
+
+
+    /*
+       Haider is MUCH taller
+    */
+
+    drawHaider(
+        haider.x,
+        H * .43
+    );
+
+
+    /*
+       When they get close
+    */
+
+    if (
+        kissing &&
+        Math.abs(haya.x - haider.x) < 70 &&
+        !finished
+    ) {
+
+        drawKiss();
+
+        finish();
+
+    }
+
+    requestAnimationFrame(animate);
+
+}
+
+</script>
+
+</body>
+</html>
