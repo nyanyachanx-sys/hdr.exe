@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>happy bf's day ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #ffeef5;
+    font-family: "Quicksand", sans-serif;
+    color: #513b45;
+    overflow: hidden;
+}
+
+
+/* MAIN SCREENS */
+
+.screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+
+/* CARD */
+
+.card {
+    width: min(90%, 650px);
+
+    background: rgba(255,255,255,0.86);
+
+    border: 2px solid #f7c8d9;
+
+    border-radius: 28px;
+
+    padding: 35px 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 40px rgba(140, 75, 100, 0.12);
+}
+
+
+/* TEXT */
+
+.small {
+    font-size: 14px;
+    color: #9b7483;
+    margin-bottom: 8px;
+}
+
+
+h1 {
+    font-family: "Patrick Hand", cursive;
+
+    font-size: clamp(48px, 10vw, 75px);
+
+    margin: 0 0 8px;
+
+    color: #d9799d;
+}
+
+
+p {
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+
+/* MESSAGE */
+
+.note {
+    background: #fff7fa;
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    margin: 22px 0;
+
+    text-align: left;
+}
+
+
+/* BUTTON */
+
+button {
+    border: none;
+
+    background: #e88aaa;
+
+    color: white;
+
+    padding: 14px 25px;
+
+    border-radius: 30px;
+
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 15px rgba(200, 100, 135, 0.2);
+
+    transition: 0.2s;
+}
+
+
+button:hover {
+    transform:
+        translateY(-2px)
+        scale(1.03);
+}
+
+
+/* =========================
+   PIXEL CATS
+========================= */
+
+.cats {
+
+    height: 150px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    margin: 5px auto 15px;
+
+    position: relative;
+}
+
+
+.cat {
+
+    position: relative;
+
+    width: 70px;
+
+    height: 105px;
+
+    image-rendering: pixelated;
+}
+
+
+/* CAT BODY */
+
+.cat-body {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 13px;
+
+    width: 45px;
+
+    height: 55px;
+
+    background: var(--cat-color);
+
+    border: 4px solid #33252a;
+}
+
+
+/* CAT HEAD */
+
+.cat-head {
+
+    position: absolute;
+
+    top: 13px;
+
+    left: 7px;
+
+    width: 56px;
+
+    height: 50px;
+
+    background: var(--cat-color);
+
+    border: 4px solid #33252a;
+}
+
+
+/* EARS */
+
+.cat-ear-left,
+.cat-ear-right {
+
+    position: absolute;
+
+    top: 0;
+
+    width: 20px;
+
+    height: 22px;
+
+    background: var(--cat-color);
+
+    border: 4px solid #33252a;
+
+    z-index: -1;
+}
+
+
+.cat-ear-left {
+
+    left: 8px;
+
+    transform: skew(-12deg);
+}
+
+
+.cat-ear-right {
+
+    right: 8px;
+
+    transform: skew(12deg);
+}
+
+
+/* EYES */
+
+.cat-eye {
+
+    position: absolute;
+
+    top: 29px;
+
+    width: 6px;
+
+    height: 7px;
+
+    background: #33252a;
+}
+
+
+.cat-eye.left {
+    left: 13px;
+}
+
+
+.cat-eye.right {
+    right: 13px;
+}
+
+
+/* NOSE */
+
+.cat-nose {
+
+    position: absolute;
+
+    top: 38px;
+
+    left: 25px;
+
+    width: 6px;
+
+    height: 5px;
+
+    background: #33252a;
+}
+
+
+/* PAWS */
+
+.cat-paw {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 16px;
+
+    height: 15px;
+
+    background: var(--cat-color);
+
+    border: 3px solid #33252a;
+}
+
+
+.cat-paw.left {
+    left: 8px;
+}
+
+
+.cat-paw.right {
+    right: 8px;
+}
+
+
+/* TAILS */
+
+.cat-tail {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    width: 30px;
+
+    height: 38px;
+
+    border: 7px solid var(--cat-color);
+
+    z-index: -2;
+}
+
+
+/* RED CAT */
+
+.red-cat {
+    --cat-color: #c95755;
+}
+
+
+.red-cat .cat-tail {
+
+    right: -5px;
+
+    border-left: 0;
+
+    border-bottom: 0;
+
+    transform: rotate(-10deg);
+}
+
+
+/* BLACK CAT */
+
+.black-cat {
+    --cat-color: #29272d;
+}
+
+
+.black-cat .cat-tail {
+
+    left: -7px;
+
+    border-right: 0;
+
+    border-bottom: 0;
+
+    transform: rotate(10deg);
+}
+
+
+/* HEART BETWEEN CATS */
+
+.cat-heart {
+
+    position: absolute;
+
+    top: 36px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 21px;
+
+    color: #e88aaa;
+
+    animation:
+        heartbeat 1.4s infinite ease-in-out;
+}
+
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            scale(1.2);
+    }
+}
+
+
+/* FLOATING HEARTS / FLOWERS */
+
+.float {
+
+    position: fixed;
+
+    pointer-events: none;
+
+    animation:
+        float 6s infinite ease-in-out;
+
+    opacity: 0.7;
+}
+
+
+@keyframes float {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            rotate(8deg);
+    }
+}
+
+
+/* HEART EXPLOSION */
+
+.explosion {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+.particle {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    font-size: 25px;
+
+    animation:
+        explode 1.1s ease-out forwards;
+}
+
+
+@keyframes explode {
+
+    from {
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+
+        opacity: 1;
+    }
+
+    to {
+
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            rotate(var(--r))
+            scale(1.3);
+
+        opacity: 0;
+    }
+}
+
+
+/* TRANSITION SCREEN */
+
+#transition {
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: scale(1.05);
+}
+
+
+#transition.show {
+
+    opacity: 1;
+
+    pointer-events: all;
+
+    transform: scale(1);
+}
+
+
+#main.hide {
+
+    opacity: 0;
+
+    transform: scale(0.96);
+
+    pointer-events: none;
+}
+
+
+.loading {
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 32px;
+
+    color: #d9799d;
+}
+
+
+.sub {
+
+    margin-top: 5px;
+
+    color: #9b7483;
+
+    font-size: 14px;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- FLOATING DECOR -->
+
+<div
+    class="float"
+    style="top:10%;left:8%;font-size:25px;"
+>
+    ♡
+</div>
+
+<div
+    class="float"
+    style="top:18%;right:12%;font-size:20px;"
+>
+    ✿
+</div>
+
+<div
+    class="float"
+    style="bottom:15%;left:14%;font-size:23px;"
+>
+    ♡
+</div>
+
+<div
+    class="float"
+    style="bottom:12%;right:9%;font-size:25px;"
+>
+    ✿
+</div>
+
+
+
+<!-- =========================
+     MAIN PAGE
+========================= -->
+
+<div
+    class="screen"
+    id="main"
+>
+
+    <div class="card">
+
+
+        <div class="small">
+            apparently this is a real thing
+        </div>
+
+
+        <h1>
+            happy bf's day ♡
+        </h1>
+
+
+
+        <!-- TWO PIXEL CATS -->
+
+        <div class="cats">
+
+
+            <!-- RED CAT -->
+
+            <div class="cat red-cat">
+
+                <div class="cat-ear-left"></div>
+
+                <div class="cat-ear-right"></div>
+
+
+                <div class="cat-head">
+
+                    <div class="cat-eye left"></div>
+
+                    <div class="cat-eye right"></div>
+
+                    <div class="cat-nose"></div>
+
+                </div>
+
+
+                <div class="cat-body"></div>
+
+
+                <div class="cat-paw left"></div>
+
+                <div class="cat-paw right"></div>
+
+
+                <div class="cat-tail"></div>
+
+            </div>
+
+
+
+            <!-- HEART -->
+
+            <div class="cat-heart">
+                ♡
+            </div>
+
+
+
+            <!-- BLACK CAT -->
+
+            <div class="cat black-cat">
+
+                <div class="cat-ear-left"></div>
+
+                <div class="cat-ear-right"></div>
+
+
+                <div class="cat-head">
+
+                    <div class="cat-eye left"></div>
+
+                    <div class="cat-eye right"></div>
+
+                    <div class="cat-nose"></div>
+
+                </div>
+
+
+                <div class="cat-body"></div>
+
+
+                <div class="cat-paw left"></div>
+
+                <div class="cat-paw right"></div>
+
+
+                <div class="cat-tail"></div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MESSAGE -->
+
+        <div class="note">
+
+            <p>
+                hiiii ♡
+            </p>
+
+
+            <p>
+                apparently it's boyfriend's day, which is honestly
+                such a random thing but obviously I had to make
+                you something.
+            </p>
+
+
+            <p>
+                I wanted to make you a little thing because I love
+                you and because you deserve something cute from me hehe.
+            </p>
+
+
+            <p>
+                yes I spent time making this instead of doing
+                uni work 😭
+            </p>
+
+        </div>
+
+
+
+        <!-- BUTTON -->
+
+        <button onclick="openThing()">
+
+            okay, go look ♡
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     TRANSITION
+========================= -->
+
+<div
+    class="screen"
+    id="transition"
+>
+
+    <div class="card">
+
+
+        <div class="loading">
+            waittt ♡
+        </div>
+
+
+        <p>
+            okay I'm actually nervous now 😭
+        </p>
+
+
+        <p>
+            go look at your thing.
+        </p>
+
+
+        <div class="sub">
+            opening your extremely important boyfriend document...
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<div
+    class="explosion"
+    id="explosion"
+></div>
+
+
+
+<script>
+
+
+function openThing() {
+
+
+    const explosion =
+        document.getElementById("explosion");
+
+
+    const things = [
+
+        "♡",
+        "♥",
+        "✿",
+        "♡",
+        "♥",
+        "✦",
+        "🌸",
+        "♡",
+        "✿",
+        "♥",
+        "♡",
+        "✦"
+
+    ];
+
+
+    things.forEach((thing) => {
+
+
+        const particle =
+            document.createElement("div");
+
+
+        particle.className =
+            "particle";
+
+
+        particle.innerHTML =
+            thing;
+
+
+        const x =
+            (Math.random() - 0.5) * 650;
+
+
+        const y =
+            (Math.random() - 0.5) * 500;
+
+
+        const r =
+            (Math.random() - 0.5) * 720;
+
+
+        particle.style.setProperty(
+            "--x",
+            `${x}px`
+        );
+
+
+        particle.style.setProperty(
+            "--y",
+            `${y}px`
+        );
+
+
+        particle.style.setProperty(
+            "--r",
+            `${r}deg`
+        );
+
+
+        explosion.appendChild(
+            particle
+        );
+
+
+    });
+
+
+
+    document
+        .getElementById("main")
+        .classList
+        .add("hide");
+
+
+
+    setTimeout(() => {
+
+
+        document
+            .getElementById("transition")
+            .classList
+            .add("show");
+
+
+    }, 500);
+
+
+
+    setTimeout(() => {
+
+
+        window.location.href =
+        "https://app.notion.com/p/My-favourite-bug-bfd84e9084e44f7e93bfe5b11d3738e9?source=copy_link";
+
+
+    }, 2800);
+
+}
+
+</script>
+
+
+</body>
+</html>
