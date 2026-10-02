@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Mama ♡</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: #fff4f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .message {
+        opacity: 0;
+        transform: translateY(15px);
+        transition: 1s ease;
+        margin-top: 25px;
+        color: #7b4c5b;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .message.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .flower {
+        position: relative;
+        width: 180px;
+        height: 260px;
+        margin: auto;
+        cursor: pointer;
+    }
+
+    /* STEM */
+
+    .stem {
+        position: absolute;
+        width: 8px;
+        height: 150px;
+        background: #6e9b61;
+        left: 86px;
+        top: 95px;
+        border-radius: 10px;
+        transform-origin: bottom;
+        transform: rotate(2deg);
+    }
+
+    /* LEAVES */
+
+    .leaf {
+        position: absolute;
+        width: 55px;
+        height: 30px;
+        background: #82aa70;
+        border-radius: 100% 0 100% 0;
+        opacity: 0;
+        transition: 0.8s ease;
+    }
+
+    .leaf.left {
+        left: 35px;
+        top: 160px;
+        transform: rotate(-25deg) scale(0);
+    }
+
+    .leaf.right {
+        right: 32px;
+        top: 130px;
+        transform: rotate(25deg) scale(0);
+    }
+
+    .flower.bloom .leaf.left,
+    .flower.bloom .leaf.right {
+        opacity: 1;
+        transform: rotate(-25deg) scale(1);
+    }
+
+    .flower.bloom .leaf.right {
+        transform: rotate(25deg) scale(1);
+    }
+
+    /* PETALS */
+
+    .petals {
+        position: absolute;
+        width: 130px;
+        height: 130px;
+        left: 25px;
+        top: 10px;
+    }
+
+    .petal {
+        position: absolute;
+        width: 62px;
+        height: 75px;
+        background: #e99aaa;
+        border-radius: 50% 50% 45% 45%;
+        left: 34px;
+        top: 28px;
+        transform-origin: 50% 85%;
+        opacity: 0;
+        transform: scale(0);
+        transition: 0.7s cubic-bezier(.17,.67,.32,1.4);
+    }
+
+    .petal:nth-child(1) {
+        transform: rotate(0deg) scale(0);
+    }
+
+    .petal:nth-child(2) {
+        transform: rotate(72deg) scale(0);
+    }
+
+    .petal:nth-child(3) {
+        transform: rotate(144deg) scale(0);
+    }
+
+    .petal:nth-child(4) {
+        transform: rotate(216deg) scale(0);
+    }
+
+    .petal:nth-child(5) {
+        transform: rotate(288deg) scale(0);
+    }
+
+    .flower.bloom .petal {
+        opacity: 1;
+    }
+
+    .flower.bloom .petal:nth-child(1) {
+        transform: rotate(0deg) scale(1);
+    }
+
+    .flower.bloom .petal:nth-child(2) {
+        transform: rotate(72deg) scale(1);
+    }
+
+    .flower.bloom .petal:nth-child(3) {
+        transform: rotate(144deg) scale(1);
+    }
+
+    .flower.bloom .petal:nth-child(4) {
+        transform: rotate(216deg) scale(1);
+    }
+
+    .flower.bloom .petal:nth-child(5) {
+        transform: rotate(288deg) scale(1);
+    }
+
+    /* CENTER */
+
+    .center {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        background: #f5c95d;
+        border-radius: 50%;
+        left: 66px;
+        top: 52px;
+        z-index: 5;
+        transform: scale(0);
+        transition: 0.7s ease;
+        box-shadow: 0 0 0 5px rgba(245,201,93,0.15);
+    }
+
+    .flower.bloom .center {
+        transform: scale(1);
+    }
+
+    /* LITTLE SPARKLES */
+
+    .sparkle {
+        position: absolute;
+        color: #e99aaa;
+        font-size: 22px;
+        opacity: 0;
+        transition: 1s ease;
+    }
+
+    .s1 {
+        left: 5px;
+        top: 30px;
+    }
+
+    .s2 {
+        right: 5px;
+        top: 65px;
+    }
+
+    .s3 {
+        left: 25px;
+        top: 105px;
+    }
+
+    .flower.bloom ~ .sparkles .sparkle {
+        opacity: 1;
+    }
+
+    .hint {
+        margin-top: -5px;
+        color: #a77b88;
+        font-size: 14px;
+    }
+
+    h1 {
+        color: #c96f82;
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>For Mama ♡</h1>
+
+    <div class="hint">
+        tap the flower 🌷
+    </div>
+
+    <div
+        class="flower"
+        id="flower"
+        onclick="bloomFlower()"
+    >
+
+        <div class="petals">
+
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+
+        </div>
+
+        <div class="center"></div>
+
+        <div class="stem"></div>
+
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
+
+    </div>
+
+
+    <div class="sparkles">
+
+        <span class="sparkle s1">✦</span>
+        <span class="sparkle s2">♡</span>
+        <span class="sparkle s3">✦</span>
+
+    </div>
+
+
+    <div class="message" id="message">
+
+        <strong>For the best mama ♡</strong>
+
+        <br><br>
+
+        Just a little flower for you,
+        because you deserve pretty things too.
+
+        <br>
+
+        I love you more than I probably say. ♡
+
+    </div>
+
+</div>
+
+
+<script>
+
+function bloomFlower() {
+
+    const flower =
+        document.getElementById("flower");
+
+    const message =
+        document.getElementById("message");
+
+    flower.classList.add("bloom");
+
+    setTimeout(() => {
+
+        message.classList.add("show");
+
+    }, 700);
+
+}
+
+</script>
+
+</body>
+</html>
